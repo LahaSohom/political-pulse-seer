@@ -116,7 +116,13 @@ const PredictionDashboard: React.FC<PredictionProps> = ({
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
+                <Tooltip 
+                  formatter={(value) => {
+                    return typeof value === 'number' 
+                      ? `${value.toFixed(1)}%` 
+                      : value;
+                  }} 
+                />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
@@ -157,7 +163,11 @@ const PredictionDashboard: React.FC<PredictionProps> = ({
                   width={40}
                 />
                 <Tooltip 
-                  formatter={(value) => [`${value.toFixed(1)}%`, 'Approval Rating']}
+                  formatter={(value) => {
+                    return typeof value === 'number' 
+                      ? [`${value.toFixed(1)}%`, 'Approval Rating'] 
+                      : [value, 'Approval Rating'];
+                  }}
                 />
                 <Legend />
                 <Bar 
